@@ -84,24 +84,8 @@ function sortNodesByApplicationName(nodes) {
 d3.csv("output.csv", function(links) {
 
     const Colours = {
-        PURPLE: {
-            BASE: '#e8c2ff',
-            HIGHLIGHTED: '#8241AA'
-        },
-        BLUE: {
-            BASE: '#c5dafc',
-            HIGHLIGHTED: '#2B74DF'
-        },
-        GREEN: {
-            BASE: '#bfffe6',
-            HIGHLIGHTED: '#00AA65'
-        },
-        RED: {
-            BASE: '#ffbacd',
-            HIGHLIGHTED: '#CE2554'
-        },
-            BASE: '#c5dafc',
-            HIGHLIGHTED: '#2B74DF'
+        BASE: '#c5dafc',
+        HIGHLIGHTED: '#2B74DF'
     }
 
     const ApplicationRoles = {
@@ -132,35 +116,6 @@ d3.csv("output.csv", function(links) {
     
     var width = d3.select('#dataviz').node().getBoundingClientRect().width
     var height = d3.select('#dataviz').node().getBoundingClientRect().height
-
-    //d3.select("#code-flow-colour").style("background-color", Colours["PURPLE"].BASE)
-        d3.select("#code-flow-colour").selectAll("rect")
-            .data(function() {
-                var coloursArray = []
-                for (var key in Colours) {
-                    coloursArray.push(Colours[key])
-                }
-                return coloursArray
-            })
-            .enter()
-            .append("rect")
-            .attr("width", 20)
-            .attr("height", 20)
-            .attr("x", function(d, i) {
-                return 20 * i + 4 
-            })
-            .attr("y", 0)
-            .attr("fill", function(d) {
-                return d.BASE
-            })
-            .style("stroke-width", "2")
-            .style("stroke", function(d) {
-                return d.BASE
-            })
-            .on("click", function(d) {
-                d3.select(this).style("stroke", "#fff")
-            })
-    //console.log(d3.select("#code-flow-colour").node().options[i].style)
 
     var nodesSortedByApplicationName = sortNodesByApplicationName(nodes) 
     var applicationElement = d3.select("#application")
