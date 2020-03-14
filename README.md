@@ -11,6 +11,10 @@ This assumes you log the following:
 
 You would need to summarize the logs to be in the data format described below.
 
+# Run it
+    
+    python -m SimpleHTTPServer 8000
+
 # The data
 
 You may notice the data in this [example](output.csv) contains names for robots. This is because I don't own my company's logs. This is a random dataset that looks like something an auth server might log.
