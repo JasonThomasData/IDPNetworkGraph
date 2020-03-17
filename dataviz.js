@@ -38,7 +38,6 @@ function getLinkColor(node, link, role, ApplicationRoles, Colours) {
         return isLinkFromSource(node, link) ? Colours.HIGHLIGHTED : Colours.BASE
     }
     return isLinkToTarget(node, link) ? Colours.HIGHLIGHTED : Colours.BASE
-
 }
 
 function getMarkerEnd(node, link, role, ApplicationRoles) {
@@ -48,20 +47,53 @@ function getMarkerEnd(node, link, role, ApplicationRoles) {
     return isLinkToTarget(node, link) ? 'url(#highlighted)' : 'url(#base)'
 }
 
-function updateDataViz(selectedNode, links, role, ApplicationRoles, nodeElements, pathElements, Colours) {
-    var neighbourIds = getNeighbourIdsDependingOnRole(selectedNode, links, role, ApplicationRoles)
+function getLinkVisibility(link, authFlowsIncluded) {
+    return authFlowsIncluded["code-flow"] && link.code_flow > 0 ||
+        authFlowsIncluded["implicit-flow"] && link.implicit_flow > 0 ||
+        authFlowsIncluded["password-flow"] && link.password_flow > 0 ||
+        authFlowsIncluded["client-credentials-flow"] && link.client_credentials_flow > 0 ||
+        authFlowsIncluded["token-exchange-flow"] && link.token_exchange_flow > 0
+}
+
+function updateHighlights(selectedNode, links, applicationRole, ApplicationRoles, nodeElements, pathElements, Colours) {
+    var neighbourIds = getNeighbourIdsDependingOnRole(selectedNode, links, applicationRole, ApplicationRoles)
 
     nodeElements.attr('fill', function (node) { return getNodeColor(node, neighbourIds, Colours) })
-    pathElements.attr('stroke', function (link) { return getLinkColor(selectedNode, link, role, ApplicationRoles, Colours) })
-    pathElements.attr('marker-end', function (link) { return getMarkerEnd(selectedNode, link, role, ApplicationRoles) })
+    pathElements.attr('stroke', function (link) { console.log(link); return getLinkColor(selectedNode, link, applicationRole, ApplicationRoles, Colours) })
+    pathElements.attr('marker-end', function (link) { return getMarkerEnd(selectedNode, link, applicationRole, ApplicationRoles) })
+
 }
+
+function updateVisibility(nodes, links, authFlowsIncluded, pathElements, nodeElements, force) {
+    /*
+    force
+        .nodes(d3.values(function () {
+            var suitableNodes = {}
+            for (const key in nodes) {
+                if (key == "adept-mining-machine") {
+                    suitableNodes.append(nodes[key])
+                }
+            }
+            return suitableNodes
+        }))
+        .start()
+    */
+   /*
+    pathElements.style('visibility', function (link) { return getLinkVisibility(link, authFlowsIncluded) })
+    links.forEach(function(link) {
+        console.log(link)
+    })
+    nodeElements.style('visibility', function (node) { return "visible" })
+    */
+}
+
 
 function updateInformation(selectedNode, links, role, ApplicationRoles, nodeElements, pathElements, Colours) {
     var neighbourIds = getNeighbourIdsDependingOnRole(selectedNode, links, role, ApplicationRoles)
 
-    nodeElements.attr('fill', function (node) { return getNodeColor(node, neighbourIds, Colours) })
-    pathElements.attr('stroke', function (link) { return getLinkColor(selectedNode, link, role, ApplicationRoles, Colours) })
-    pathElements.attr('marker-end', function (link) { return getMarkerEnd(selectedNode, link, role, ApplicationRoles) })
+    //nodeElements.attr('fill', function (node) { return getNodeColor(node, neighbourIds, Colours) })
+    //pathElements.attr('stroke', function (link) { return getLinkColor(selectedNode, link, role, ApplicationRoles, Colours) })
+    //pathElements.attr('marker-end', function (link) { return getMarkerEnd(selectedNode, link, role, ApplicationRoles) })
 }
 
 function sortNodesByApplicationName(nodes) {
@@ -81,7 +113,40 @@ function sortNodesByApplicationName(nodes) {
     return nodesSortedByApplicationName
 }
 
-d3.csv("output.csv", function(links) {
+function getLinksForDisplay(links, authFlowsIncluded) {
+    var linksForDisplay = []
+    links.forEach(function(link) {
+        if(getLinkVisibility(link, authFlowsIncluded))
+        linksForDisplay.push(link)
+    })
+    return linksForDisplay
+}
+
+function getNodesForDisplay(linksForDisplay) {
+    var nodes = {};
+    //In this graph, source == client_id and target == resource_id
+    linksForDisplay.forEach(function(link) {
+        if(link.source.id != undefined) {
+            link.source = link.source.id
+        }
+        if(link.target.id != undefined) {
+            link.target = link.target.id
+        }
+        link.source = nodes[link.source] ||
+            (nodes[link.source] = {
+                id: link.client_id,
+                name: link.client_name
+            });
+        link.target = nodes[link.target] ||
+            (nodes[link.target] = {
+                id: link.resource_id,
+                name: link.resource_name
+            });
+    });
+    return nodes;
+}
+
+d3.csv("output.csv", function(linksLoaded) {
 
     const Colours = {
         BASE: '#c5dafc',
@@ -95,47 +160,69 @@ d3.csv("output.csv", function(links) {
 
     var dataVizState = {
         selectedNode: null,
-        applicationRole: getApplicationRole(ApplicationRoles) 
+        applicationRole: getApplicationRole(ApplicationRoles),
+        authFlowsIncluded: {
+            "code-flow": true,
+            "implicit-flow": true,
+            "password-flow": true,
+            "client-credentials-flow": true,
+            "token-exchange-flow": true 
+        }
     }
 
-    var nodes = {};
+    var linksForDisplay = getLinksForDisplay(linksLoaded, dataVizState.authFlowsIncluded); 
+    var nodesForDisplay = getNodesForDisplay(linksForDisplay);
     //In this graph, source == client_id and target == resource_id
-    links.forEach(function(link) {
-        link.source = nodes[link.source] || 
-            (nodes[link.source] = {
-                id: link.client_id,
-                name: link.client_name
-                });
-        link.target = nodes[link.target] || 
-            (nodes[link.target] = {
-                id: link.resource_id,
-                name: link.resource_name
-                });
-    });
-    console.log(nodes)
     
     var width = d3.select('#dataviz').node().getBoundingClientRect().width
     var height = d3.select('#dataviz').node().getBoundingClientRect().height
 
-    var nodesSortedByApplicationName = sortNodesByApplicationName(nodes) 
-    var applicationElement = d3.select("#application")
-    nodesSortedByApplicationName.forEach(function(node) {
-        applicationElement.append("option")
-            .attr("value", node.id)
-            .text(node.name)
-    })
-    
     //Centre the graph in the middle of the page
     //Make the centre vertex, or root node, unmoving, or hard to move
     var force = d3.layout.force()
+        .nodes(d3.values(nodesForDisplay))
+        .links(linksForDisplay)
+        .size([width, height])
+        .linkDistance(15)
+        .charge(function(d, i) { return d.weight * -100 - 100; })
+        .on("tick", tick)
+        .start()
+
+    /*
+    setTimeout(function() {
+        var nodesToRemove = []
+        nodesToRemove.push(force.nodes()[0])
+        nodesToRemove.push(force.nodes()[5])
+        nodesToRemove.push(force.nodes()[10])
+        nodesToRemove.push(force.nodes()[15])
+        nodesToRemove.push(force.nodes()[20])
+        nodesToRemove.push(force.nodes()[25])
+        force.nodes().splice(0, 1);
+        force.nodes().splice(5, 1);
+        force.nodes().splice(10, 1);
+        force.nodes().splice(15, 1);
+        force.nodes().splice(20, 1);
+        force.nodes().splice(25, 1);
+        nodesToRemove.forEach(function(node) {
+            var links = force.links()
+            var links = force.links().filter(function(l) {
+                return l.source !== node && l.target !== node;
+            });
+            force.links(links)
+        })
+    }, 2000)
+
+    setTimeout(function() {
+        force
         .nodes(d3.values(nodes))
         .links(links)
         .size([width, height])
         .linkDistance(15)
-        .charge(function(d, i) { return d.weight * -150; })
+        .charge(function(d, i) { return d.weight * -100 - 100; })
         .on("tick", tick)
-
-    force.start();
+        .start()
+    }, 3000)
+    */
 
     function dragged() {
         console.log(d3.select("g"))
@@ -161,7 +248,7 @@ d3.csv("output.csv", function(links) {
     var svg = d3.select("#dataviz").append("svg")
         .attr("width", width)
         .attr("height", height)
-        .attr("cursor", "grab")
+        //.attr("cursor", "grab")
         .attr("viewBox", "0 0 " + width*1.2 + " " + height*1.2 )
         //.call(zoomBehaviour);
 
@@ -228,21 +315,72 @@ d3.csv("output.csv", function(links) {
             .on('click', function(node) {
                 dataVizState.selectedNode = node
                 document.getElementById('application').value = node.id;
-                updateDataViz(node, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
+                updateHighlights(node, linksForDisplay, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
             })
 
     d3.select("#role")
         .on('change', function() {
             dataVizState.applicationRole = getApplicationRole(ApplicationRoles) 
-            updateDataViz(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
+            updateHighlights(dataVizState.selectedNode, linksForDisplay, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
         })
 
+    var nodesSortedByApplicationName = sortNodesByApplicationName(nodesForDisplay) 
     var applicationSelectElement = d3.select("#application")
         .on('change', function() {
             var applicationId = this.options[this.selectedIndex].value
-            dataVizState.selectedNode = nodes[applicationId] 
-            updateInformation(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
-            updateDataViz(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
+            dataVizState.selectedNode = nodesForDisplay[applicationId] 
+            //updateInformation(dataVizState.selectedNode, links, dataVizState, ApplicationRoles, nodeElements, pathElements, Colours)
+            updateHighlights(dataVizState.selectedNode, linksForDisplay, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
+        })
+    nodesSortedByApplicationName.forEach(function(node) {
+        applicationSelectElement.append("option")
+            .attr("value", node.id)
+            .text(node.name)
+    })
+    
+    d3.selectAll(".auth-flow-toggle")
+        .on("change", function() {
+            //console.log(this)
+            const checkBoxId = d3.select(this).property("id")
+            //console.log("id", checkBoxId)
+            const checkBoxChecked = d3.select(this).property("checked")
+            //console.log("id", checkBoxChecked)
+            dataVizState.authFlowsIncluded[checkBoxId] = checkBoxChecked
+
+            //console.log("Links", linksForDisplay)
+            linksForDisplay = getLinksForDisplay(linksLoaded, dataVizState.authFlowsIncluded); 
+            //console.log("Links", linksForDisplay)
+
+            console.log("Nodes", nodesForDisplay)
+            nodesForDisplay = getNodesForDisplay(linksForDisplay);
+            console.log("Nodes", nodesForDisplay)
+
+            force.nodes(d3.values(nodesForDisplay))
+                .links(linksForDisplay)
+                .size([width, height])
+                .linkDistance(15)
+                .charge(function(d, i) { return d.weight * -100 - 100; })
+                .start()
+
+                /*
+            d3.selectAll("path")
+                    .data(force.links())
+                    .enter().append("svg:path")
+                    .attr("class", "link")
+                    .attr("marker-end", "url(#base)")
+                    .attr("stroke", Colours.BASE);
+            */
+
+            //console.log("Nodes", nodesForDisplay)
+            //updateVisibility(nodesForDisplay, linksForDisplay, dataVizState.authFlowsIncluded, pathElements, nodeElements, force)
+            /*
+            force.nodes(d3.values(nodesForDisplay))
+                .links(linksForDisplay)
+                .size([width, height])
+                .linkDistance(15)
+                .charge(function(d, i) { return d.weight * -100 - 100; })
+                .start()
+            */
         })
 
     function tick() {
