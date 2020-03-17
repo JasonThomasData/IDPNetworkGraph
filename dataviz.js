@@ -212,7 +212,7 @@ d3.csv("output.csv", function(links) {
     var svg = d3.select("#dataviz").append("svg")
         .attr("width", width)
         .attr("height", height)
-        .attr("viewBox", "0 -100 " + width*1.3 + " " + height*1.3 )
+        .attr("viewBox", "-120 -100 " + width*1.3 + " " + height*1.3 )
 
     var g = svg.append("g")
         .attr("align","center")
