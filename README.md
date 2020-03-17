@@ -1,5 +1,7 @@
 # Visualise authenitcation flows between applications
 
+![dataviz screenshoy](screenshot.png)
+
 This is a dataviz to help you understand the relationships between services that use a single Identity Provider (IDP).
 
 I work in a company where many services interact by passing tokens to one another. Those tokens come from an internal Identity Provider, which has implemented the Oauth2/OIDC specs. 
