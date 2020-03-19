@@ -333,25 +333,6 @@ d3.csv("output.csv", function(links) {
                 updateHighlights(node, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
             })
 
-    setTimeout(function(){
-        var box = g.node().getBBox();
-        console.log(g.node())
-        var eleWidth = box.width, eleHeight = box.height;
-        console.log(eleWidth, eleHeight)
-        //svg.attr("width", g.node().getBoundingClientRect().width)
-        //svg.attr("height", g.node().getBoundingClientRect().height)
-        //g.attr("transform", "translate(300,300)");
-    }, 3000)
-    setTimeout(function(){
-        var box = g.node().getBBox();
-        console.log(g.node())
-        var eleWidth = box.width, eleHeight = box.height;
-        console.log(eleWidth, eleHeight)
-        //svg.attr("width", g.node().getBoundingClientRect().width)
-        //svg.attr("height", g.node().getBoundingClientRect().height)
-        //g.attr("transform", "translate(0,0)");
-    }, 6000)
-
     d3.select("#role")
         .on('change', function() {
             dataVizState.applicationRole = getApplicationRole(ApplicationRoles) 
