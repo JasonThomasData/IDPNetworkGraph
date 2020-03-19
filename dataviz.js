@@ -240,7 +240,7 @@ d3.csv("output.csv", function(links) {
     var links = addVisibleFieldToLinks(links);
     var nodes = getNodes(links);
     
-    var width = d3.select('#content').node().getBoundingClientRect().width*3/4
+    var width = d3.select('#content').node().getBoundingClientRect().width
     var height = d3.select('#content').node().getBoundingClientRect().height
 
     var force = d3.layout.force()
@@ -268,10 +268,6 @@ d3.csv("output.csv", function(links) {
             const newY = d3.event.y + this.initialYDiff
             d3.select("g").attr("transform", "translate(" + newX + "," + newY + ")");
         })
-        .on("dragend", function() {
-            tick();
-            force.resume();
-        });
 
     var svg = d3.select("#content").append("svg")
         .attr("width", width)
