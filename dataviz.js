@@ -63,11 +63,12 @@ function getMarkerEnd(node, link, role, ApplicationRoles) {
 }
 
 function getLinkVisibility(link, authFlowsIncluded) {
-    return authFlowsIncluded["code-flow"] && link.code_flow > 0 ||
-        authFlowsIncluded["implicit-flow"] && link.implicit_flow > 0 ||
-        authFlowsIncluded["password-flow"] && link.password_flow > 0 ||
-        authFlowsIncluded["client-credentials-flow"] && link.client_credentials_flow > 0 ||
-        authFlowsIncluded["token-exchange-flow"] && link.token_exchange_flow > 0
+    return authFlowsIncluded["client_credentials_flow"] && link.client_credentials_flow > 0 ||
+        authFlowsIncluded["code_flow"] && link.code_flow > 0 ||
+        authFlowsIncluded["implicit_flow"] && link.implicit_flow > 0 ||
+        authFlowsIncluded["password_flow"] && link.password_flow > 0 ||
+        authFlowsIncluded["refresh_token_flow"] && link.refresh_token_flow > 0 ||
+        authFlowsIncluded["token_exchange_flow"] && link.token_exchange_flow > 0
 }
 
 function updateHighlights(selectedNode, links, applicationRole, ApplicationRoles, nodeElements, pathElements, Colours) {
@@ -186,11 +187,12 @@ d3.csv("output.csv", function(links) {
         selectedNode: null,
         applicationRole: getApplicationRole(ApplicationRoles),
         authFlowsIncluded: {
-            "code-flow": true,
-            "implicit-flow": true,
-            "password-flow": true,
-            "client-credentials-flow": true,
-            "token-exchange-flow": true 
+            "client_credentials_flow": true,
+            "code_flow": true,
+            "implicit_flow": true,
+            "password_flow": true,
+            "refresh_token_flow": true,
+            "token_exchange_flow": true 
         }
     }
 
@@ -237,7 +239,7 @@ d3.csv("output.csv", function(links) {
         .attr("markerHeight", 8)
         .attr("orient", "auto")
         .append("svg:path")
-        .attr("d", "M0,-5L10,0L0,5")
+        .attr("d", "M0,-6L10,0L0,6")
         .attr("fill", Colours.HIGHLIGHTED);
 
     g.append("svg:defs").selectAll("marker")
@@ -251,7 +253,7 @@ d3.csv("output.csv", function(links) {
         .attr("markerHeight", 8)
         .attr("orient", "auto")
         .append("svg:path")
-        .attr("d", "M0,-5L10,0L0,5")
+        .attr("d", "M0,-4L10,0L0,4")
         .attr("fill", Colours.BASE);
 
     var nodeElements = g.append("g")
