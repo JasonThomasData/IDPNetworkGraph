@@ -24,7 +24,8 @@
         height: 100%;
     }
     #information {
-        float: right;
+        position: fixed;
+        right: 0;
         width: 33%;
         height: 100%;
     }
@@ -50,14 +51,23 @@
     .auth-flow-colours{
         height: 20px;
     }
-    .auth-flow-colours rect{
+    .auth-flow-colours rect {
         
         border-radius: 1px;
+    }
+    #applications-list li {
+        cursor: pointer; 
+        list-style-type: circle;
+    }
+    svg {
+        transition: all 2s linear;
     }
 </style>
 <body>
     <div id="content">
+        <!---
         <div id="dataviz"></div>   
+        -->
         <div id="information">
             <div id="user-input">
                 <h3>Variables</h3>
@@ -83,15 +93,15 @@
                 </div>
                 <div class="information-box">
                     <div>
-                        <p>Application:</p>
-                        <select id="application"></select>
-                    </div>
-                    <div>
                         <p>Role:</p>
                         <select id="role">
                             <option value="CLIENT" selected="selected">Client</option>
                             <option value="RESOURCE">Resource</option>
                         </select>
+                    </div>
+                    <div>
+                        <p>Application:</p>
+                        <select id="application"></select>
                     </div>
                     <div id="applications-list">
                         <p></p>

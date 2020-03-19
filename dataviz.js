@@ -86,28 +86,30 @@ function updateLinkVisibility(nodes, links, authFlowsIncluded, pathElements, nod
     pathElements.style('visibility', function (link) { return link["visible"] ? "visible" : "hidden" })
 }
 
-function updateInformation(selectedNode, links, role, ApplicationRoles, applicationInformation) {
-    const summaryForThisApplication = summariseApplicationRelationships(selectedNode, links, role, ApplicationRoles)
-    applicationInformation.select("ul").selectAll("li").remove()
+function updateInformation(selectedNode, links, applicationRole, ApplicationRoles, applicationInformationElement, applicationListUpdateCallback) {
+    const summaryForThisApplication = summariseApplicationRelationships(selectedNode, links, applicationRole, ApplicationRoles)
+    applicationInformationElement.select("ul").selectAll("li").remove()
 
     if (summaryForThisApplication["clients"].length > 0) {
-        applicationInformation.style("display", "block")
-        const message = "- accessed by these clients"
-        applicationInformation.select("p").text(message)
-        summaryForThisApplication["clients"].forEach(function(client) {
-            applicationInformation.select("ul").append("li").text(client.name)
+        applicationInformationElement.style("display", "block")
+        const message = "accessed by these clients"
+        applicationInformationElement.select("p").text(message)
+        summaryForThisApplication["clients"].forEach(function(anApplicationToAppend) {
+            applicationToAppend = anApplicationToAppend
+            applicationListUpdateCallback(applicationToAppend)
         })
     }
     else if (summaryForThisApplication["resources"].length > 0) {
-        applicationInformation.style("display", "block")
-        const message = "- accessed these resource servers"
-        applicationInformation.select("p").text(message)
-        summaryForThisApplication["resources"].forEach(function(resource) {
-            applicationInformation.select("ul").append("li").text(resource.name)
+        applicationInformationElement.style("display", "block")
+        const message = "accessed these resource servers"
+        applicationInformationElement.select("p").text(message)
+        summaryForThisApplication["resources"].forEach(function(anApplicationToAppend) {
+            applicationToAppend = anApplicationToAppend
+            applicationListUpdateCallback(applicationToAppend)
         })
     }
     else {
-        applicationInformation.style("display", "none")
+        applicationInformationElement.style("display", "none")
     }
 }
 
@@ -171,6 +173,45 @@ function getMostCommonClient(nodes) {
     return mostCommentClient;
 }
 
+function getNodeById(nodes, id) {
+    for (const key in nodes) {
+        if (nodes[key].id == id) {
+            return nodes[key]
+        }
+    }
+    return null;
+}
+
+function appendListElement(applicationInformationElement, dataVizState, links, nodes, ApplicationRoles, nodeElements, pathElements, Colours, application) {
+    applicationInformationElement.select("ul")
+        .append("li")
+        .attr("application_id", application.id)
+        .text(application.name)
+        .style("color", Colours.HIGHLIGHTED)
+        .on("mouseover", function() {
+            const listElement = d3.select(this)
+            listElement.style("font-weight", "bold")
+            listElement.style("color", Colours.HIGHLIGHTED)
+            const tempSelectedNode = getNodeById(nodes, listElement.attr("application_id"))
+            const oppositeRole = !dataVizState.applicationRole
+            updateHighlights(tempSelectedNode, links, oppositeRole, ApplicationRoles, nodeElements, pathElements, Colours)
+        })
+        .on("mouseout", function() {
+            const listElement = d3.select(this)
+            listElement.style("font-weight", "normal")
+            updateHighlights(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
+        })
+        .on("click", function() {
+            const listElement = d3.select(this)
+            dataVizState.selectedNode = nodes[listElement.attr("application_id")] 
+            document.getElementById('application').value = dataVizState.selectedNode.id;
+            updateInformation(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, applicationInformationElement, function() { 
+                appendListElement(applicationInformationElement, dataVizState, links, nodes, ApplicationRoles, nodeElements, pathElements, Colours, applicationToAppend)
+            })
+            updateHighlights(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
+        })
+}
+
 d3.csv("output.csv", function(links) {
 
     const Colours = {
@@ -199,8 +240,8 @@ d3.csv("output.csv", function(links) {
     var links = addVisibleFieldToLinks(links);
     var nodes = getNodes(links);
     
-    var width = d3.select('#dataviz').node().getBoundingClientRect().width
-    var height = d3.select('#dataviz').node().getBoundingClientRect().height
+    var width = d3.select('#content').node().getBoundingClientRect().width*3/4
+    var height = d3.select('#content').node().getBoundingClientRect().height
 
     var force = d3.layout.force()
         .nodes(d3.values(nodes))
@@ -211,13 +252,35 @@ d3.csv("output.csv", function(links) {
         .on("tick", tick)
         .start()
 
-    var svg = d3.select("#dataviz").append("svg")
+    var drag = d3.behavior.drag()
+        .on("dragstart", function(){
+            const currentTransform = d3.transform(d3.select("g").attr("transform"));
+            this.initialX = currentTransform.translate[0]
+            this.initialY = currentTransform.translate[1]
+            this.initialXDiff = +this.initialX - d3.event.sourceEvent.x
+            this.initialYDiff = +this.initialY - d3.event.sourceEvent.y
+            console.log("initial", this.initialX, this.initialY)
+            console.log("initial diff", this.initialXDiff, this.initialYDiff)
+        })
+        .on("drag", function(){
+
+            const newX = d3.event.x + this.initialXDiff
+            const newY = d3.event.y + this.initialYDiff
+            d3.select("g").attr("transform", "translate(" + newX + "," + newY + ")");
+        })
+        .on("dragend", function() {
+            tick();
+            force.resume();
+        });
+
+    var svg = d3.select("#content").append("svg")
         .attr("width", width)
         .attr("height", height)
-        .attr("viewBox", "-120 -100 " + width*1.3 + " " + height*1.3 )
-
+        .call(drag);
+        
     var g = svg.append("g")
-        .attr("align","center")
+        .attr("align","right")
+        .attr("transform", "translate(0,0)")
 
     var applicationInformationElement = d3.select("#applications-list")
 
@@ -268,14 +331,37 @@ d3.csv("output.csv", function(links) {
             .on('click', function(node) {
                 dataVizState.selectedNode = node
                 document.getElementById('application').value = node.id;
-                updateInformation(node, links, dataVizState.applicationRole, ApplicationRoles, applicationInformationElement)
+                updateInformation(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, applicationInformationElement, function() { 
+                    appendListElement(applicationInformationElement, dataVizState, links, nodes, ApplicationRoles, nodeElements, pathElements, Colours, applicationToAppend)
+                })
                 updateHighlights(node, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
             })
+
+    setTimeout(function(){
+        var box = g.node().getBBox();
+        console.log(g.node())
+        var eleWidth = box.width, eleHeight = box.height;
+        console.log(eleWidth, eleHeight)
+        //svg.attr("width", g.node().getBoundingClientRect().width)
+        //svg.attr("height", g.node().getBoundingClientRect().height)
+        //g.attr("transform", "translate(300,300)");
+    }, 3000)
+    setTimeout(function(){
+        var box = g.node().getBBox();
+        console.log(g.node())
+        var eleWidth = box.width, eleHeight = box.height;
+        console.log(eleWidth, eleHeight)
+        //svg.attr("width", g.node().getBoundingClientRect().width)
+        //svg.attr("height", g.node().getBoundingClientRect().height)
+        //g.attr("transform", "translate(0,0)");
+    }, 6000)
 
     d3.select("#role")
         .on('change', function() {
             dataVizState.applicationRole = getApplicationRole(ApplicationRoles) 
-            updateInformation(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, applicationInformationElement)
+            updateInformation(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, applicationInformationElement, function() { 
+                appendListElement(applicationInformationElement, dataVizState, links, nodes, ApplicationRoles, nodeElements, pathElements, Colours, applicationToAppend)
+            })
             updateHighlights(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
         })
 
@@ -284,7 +370,9 @@ d3.csv("output.csv", function(links) {
         .on('change', function() {
             const applicationId = this.options[this.selectedIndex].value
             dataVizState.selectedNode = nodes[applicationId] 
-            updateInformation(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, applicationInformationElement)
+            updateInformation(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, applicationInformationElement, function() { 
+                appendListElement(applicationInformationElement, dataVizState, links, nodes, ApplicationRoles, nodeElements, pathElements, Colours, applicationToAppend)
+            })
             updateHighlights(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
         })
     nodesSortedByApplicationName.forEach(function(node) {
@@ -300,13 +388,18 @@ d3.csv("output.csv", function(links) {
             dataVizState.authFlowsIncluded[checkBoxId] = checkBoxChecked
 
             updateLinkVisibility(nodes, links, dataVizState.authFlowsIncluded, pathElements, nodeElements)
-            updateInformation(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, applicationInformationElement)
+            updateInformation(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, applicationInformationElement, function() { 
+                appendListElement(applicationInformationElement, dataVizState, links, nodes, ApplicationRoles, nodeElements, pathElements, Colours, applicationToAppend)
+            })
             updateHighlights(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
         })
 
     dataVizState.selectedNode = getMostCommonClient(nodes)
+    document.getElementById('application').value = dataVizState.selectedNode.id;
     updateLinkVisibility(dataVizState.selectedNode, links, dataVizState.authFlowsIncluded, pathElements, nodeElements)
-    updateInformation(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, applicationInformationElement)
+    updateInformation(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, applicationInformationElement, function() {
+        appendListElement(applicationInformationElement, dataVizState, links, nodes, ApplicationRoles, nodeElements, pathElements, Colours, applicationToAppend)
+    })
     updateHighlights(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
 
     function tick() {
