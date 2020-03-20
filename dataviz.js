@@ -212,7 +212,7 @@ function appendListElement(applicationInformationElement, dataVizState, links, n
         })
 }
 
-d3.csv("output.csv", function(links) {
+d3.csv("edge-list.csv", function(links) {
 
     const Colours = {
         BASE: '#c5dafc',
