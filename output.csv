@@ -1,96 +1,96 @@
-source,target,client_id,resource_id,client_name,resource_name,password_flow,token_exchange_flow,code_flow,client_credentials_flow,implicit_flow
-bionic-docking-prototype,integrated-emergency-response-drone,bionic-docking-prototype,integrated-emergency-response-drone,Bionic Docking Prototype,Integrated Emergency Response Drone,0,0,0,0,27208
-t-1000,humanoid-vegetation-droid,t-1000,humanoid-vegetation-droid,T-1000,Humanoid Vegetation Droid,0,0,5784,0,0
-c3po,humanoid-vegetation-droid,c3po,humanoid-vegetation-droid,C3PO,Humanoid Vegetation Droid,0,0,0,0,10569
-self-reliant-bomb-disposal-golem,experimental-emergency-repair-automaton,self-reliant-bomb-disposal-golem,experimental-emergency-repair-automaton,Self-Reliant Bomb Disposal Golem,Experimental Emergency Repair Automaton,0,0,1662,0,0
-sensory-flora-and-fauna-technology,strategic-airplane-control-golem,sensory-flora-and-fauna-technology,strategic-airplane-control-golem,Sensory Flora and Fauna Technology,Strategic Airplane Control Golem,0,0,0,0,229
-extraterrestial-servant-prototype,automatic-animal-protection-android,extraterrestial-servant-prototype,automatic-animal-protection-android,Extraterrestial Servant Prototype,Automatic Animal Protection Android,0,0,162,0,0
-supreme-translation-robot,conscious-piloting-juggernaut,supreme-translation-robot,conscious-piloting-juggernaut,Supreme Translation Robot,Conscious Piloting Juggernaut,0,0,0,0,470
-awesom-o,global-operation-robot,awesom-o,global-operation-robot,Awesom-O,Global Operation Robot,0,0,0,0,65
-t-1000,megaman,t-1000,megaman,T-1000,MegaMan,0,0,27,0,0
-generic-engineering-technology,automatic-animal-protection-android,generic-engineering-technology,automatic-animal-protection-android,Generic Engineering Technology,Automatic Animal Protection Android,0,0,22,0,0
-survey-drone,automatic-animal-protection-android,survey-drone,automatic-animal-protection-android,Survey Drone,Automatic Animal Protection Android,0,0,0,0,12
-conscious-regulation-emulator,humanoid-vegetation-droid,conscious-regulation-emulator,humanoid-vegetation-droid,Conscious Regulation Emulator,Humanoid Vegetation Droid,0,0,478764,0,0
-speedy,cybernated-pilot-bot,speedy,cybernated-pilot-bot,Speedy,Cybernated Pilot Bot,0,0,0,0,3
-speedy,"ukrator	metal-gerzinen",speedy,"ukrator	metal-gerzinen",Speedy,"Ukrator	Metal Gerzinen",0,0,0,0,4874
-electronic-shepherd-droid,disposal-emulator,electronic-shepherd-droid,disposal-emulator,Electronic Shepherd Droid,Disposal Emulator,0,0,0,0,786
-marvin-the-paranoid-android,conscious-regulation-emulator,marvin-the-paranoid-android,conscious-regulation-emulator,Marvin the Paranoid Android,Conscious Regulation Emulator,0,0,62462,0,0
-marvin-the-paranoid-android,responsive-education-device,marvin-the-paranoid-android,responsive-education-device,Marvin the Paranoid Android,Responsive Education Device,0,0,1,0,0
-conscious-termination-emulator,motorized-safety-guard-cyborg,conscious-termination-emulator,motorized-safety-guard-cyborg,Conscious Termination Emulator,Motorized Safety Guard Cyborg,0,0,1,0,0
-extra-terrestrial-shepherd-android,robotic-robot-control-technician,extra-terrestrial-shepherd-android,robotic-robot-control-technician,Extra-Terrestrial Shepherd Android,Robotic Robot Control Technician,0,0,0,541730,0
-humanoid-planet-exploration-emulator,automated-contamination-juggernaut,humanoid-planet-exploration-emulator,automated-contamination-juggernaut,Humanoid Planet Exploration Emulator,Automated Contamination Juggernaut,0,177321,0,0,0
-unified-harvesting-prototype,the-iron-giant,unified-harvesting-prototype,the-iron-giant,Unified Harvesting Prototype,THE IRON GIANT,0,0,0,118413,0
-unified-harvesting-prototype,essential-probe-golem,unified-harvesting-prototype,essential-probe-golem,Unified Harvesting Prototype,Essential Probe Golem,0,0,0,85969,0
-highpowered-regulation-robot,motorized-safety-guard-cyborg,highpowered-regulation-robot,motorized-safety-guard-cyborg,Highpowered Regulation Robot,Motorized Safety Guard Cyborg,0,0,0,25220,0
-reactive-guidance-juggernaut,self-reliant-transportation-automaton,reactive-guidance-juggernaut,self-reliant-transportation-automaton,Reactive Guidance Juggernaut,Self-Reliant Transportation Automaton,0,0,0,18459,0
-bishop,strategic-domination-droid,bishop,strategic-domination-droid,Bishop,Strategic Domination Droid,0,0,0,11127,0
-high-powered-science-android,essential-probe-golem,high-powered-science-android,essential-probe-golem,High-Powered Science Android,Essential Probe Golem,0,0,0,7848,0
-bishop,self-reliant-transportation-automaton,bishop,self-reliant-transportation-automaton,Bishop,Self-Reliant Transportation Automaton,0,0,0,6394,0
-asx-automated-trader,experimental-mining-golem,asx-automated-trader,experimental-mining-golem,Asx Automated Trader,Experimental Mining Golem,0,0,0,4095,0
-bishop,motorized-safety-guard-cyborg,bishop,motorized-safety-guard-cyborg,Bishop,Motorized Safety Guard Cyborg,0,0,0,3978,0
-generic-animal-handling-entity,leonardo,generic-animal-handling-entity,leonardo,Generic Animal Handling Entity,LEONARDO,0,0,0,3713,0
-humanoid-planet-exploration-emulator,extra-terrestrial-shepherd-android,humanoid-planet-exploration-emulator,extra-terrestrial-shepherd-android,Humanoid Planet Exploration Emulator,Extra-Terrestrial Shepherd Android,0,0,0,2899,0
-self-aware-planetary-analysis-drone,self-aware-repairation-prototype,self-aware-planetary-analysis-drone,self-aware-repairation-prototype,Self-Aware Planetary Analysis Drone,Self-Aware Repairation Prototype,0,0,0,2842,0
-self-aware-planetary-analysis-drone,motorized-safety-guard-cyborg,self-aware-planetary-analysis-drone,motorized-safety-guard-cyborg,Self-Aware Planetary Analysis Drone,Motorized Safety Guard Cyborg,0,0,0,2315,0
-generic-animal-handling-entity,motorized-safety-guard-cyborg,generic-animal-handling-entity,motorized-safety-guard-cyborg,Generic Animal Handling Entity,Motorized Safety Guard Cyborg,0,0,0,2044,0
-chougaodeen-robo,high-powered-science-android,chougaodeen-robo,high-powered-science-android,Chougaodeen Robo,High-Powered Science Android,0,0,0,2030,0
-digital-operation-juggernaut,self-aware-planetary-analysis-drone,digital-operation-juggernaut,self-aware-planetary-analysis-drone,Digital Operation Juggernaut,Self-Aware Planetary Analysis Drone,0,0,0,2015,0
-self-aware-planetary-analysis-drone,scrap-iron,self-aware-planetary-analysis-drone,scrap-iron,Self-Aware Planetary Analysis Drone,Scrap Iron,0,0,0,2014,0
-humanoid-planet-exploration-emulator,"ukrator	metal-gerzinen",humanoid-planet-exploration-emulator,"ukrator	metal-gerzinen",Humanoid Planet Exploration Emulator,"Ukrator	Metal Gerzinen",0,180664,0,1304,0
-self-aware-planetary-analysis-drone,digital-operation-juggernaut,self-aware-planetary-analysis-drone,digital-operation-juggernaut,Self-Aware Planetary Analysis Drone,Digital Operation Juggernaut,0,0,0,1237,0
-strategic-domination-droid,motorized-safety-guard-cyborg,strategic-domination-droid,motorized-safety-guard-cyborg,Strategic Domination Droid,Motorized Safety Guard Cyborg,0,4019,0,1089,0
-chougaodeen-robo,solar-animal-protection-cyborg,chougaodeen-robo,solar-animal-protection-cyborg,Chougaodeen Robo,Solar Animal Protection Cyborg,0,0,0,1038,0
-generic-animal-handling-entity,megaman,generic-animal-handling-entity,megaman,Generic Animal Handling Entity,MegaMan,0,0,0,1034,0
-integrated-emergency-response-drone,chougaodeen-robo,integrated-emergency-response-drone,chougaodeen-robo,Integrated Emergency Response Drone,Chougaodeen Robo,0,0,0,939,0
-humanoid-planet-exploration-emulator,primary-repairation-android,humanoid-planet-exploration-emulator,primary-repairation-android,Humanoid Planet Exploration Emulator,Primary Repairation Android,0,0,0,849,0
-experimental-emergency-repair-automaton,asx-200-chart-maker,experimental-emergency-repair-automaton,asx-200-chart-maker,Experimental Emergency Repair Automaton,Asx 200 Chart Maker,0,0,0,805,0
-self-aware-planetary-analysis-drone,humanoid-vegetation-droid,self-aware-planetary-analysis-drone,humanoid-vegetation-droid,Self-Aware Planetary Analysis Drone,Humanoid Vegetation Droid,0,0,0,693,0
-strategic-domination-droid,strategic-airplane-control-golem,strategic-domination-droid,strategic-airplane-control-golem,Strategic Domination Droid,Strategic Airplane Control Golem,0,0,0,576,0
-solar-animal-protection-cyborg,chougaodeen-robo,solar-animal-protection-cyborg,chougaodeen-robo,Solar Animal Protection Cyborg,Chougaodeen Robo,0,0,0,576,0
-solar-animal-protection-cyborg,primary-repairation-android,solar-animal-protection-cyborg,primary-repairation-android,Solar Animal Protection Cyborg,Primary Repairation Android,0,0,0,567,0
-strategic-domination-droid,highpowered-regulation-robot,strategic-domination-droid,highpowered-regulation-robot,Strategic Domination Droid,Highpowered Regulation Robot,0,0,0,561,0
-compact-personal-protection-device,strategic-airplane-control-golem,compact-personal-protection-device,strategic-airplane-control-golem,Compact Personal Protection Device,Strategic Airplane Control Golem,0,0,0,548,0
-strategic-domination-droid,bishop,strategic-domination-droid,bishop,Strategic Domination Droid,Bishop,0,0,0,530,0
-chougaodeen-robo,adept-mining-machine,chougaodeen-robo,adept-mining-machine,Chougaodeen Robo,Adept Mining Machine,0,0,0,476,0
-humanoid-planet-exploration-emulator,disposal-emulator,humanoid-planet-exploration-emulator,disposal-emulator,Humanoid Planet Exploration Emulator,Disposal Emulator,0,0,0,434,0
-strategic-domination-droid,prime-waste-collection-machine,strategic-domination-droid,prime-waste-collection-machine,Strategic Domination Droid,Prime Waste Collection Machine,0,407,0,0,0
-strategic-domination-droid,self-aware-planetary-analysis-drone,strategic-domination-droid,self-aware-planetary-analysis-drone,Strategic Domination Droid,Self-Aware Planetary Analysis Drone,0,0,0,393,0
-high-powered-science-android,the-iron-giant,high-powered-science-android,the-iron-giant,High-Powered Science Android,THE IRON GIANT,0,0,0,392,0
-experimental-emergency-repair-automaton,"ukrator	metal-gerzinen",experimental-emergency-repair-automaton,"ukrator	metal-gerzinen",Experimental Emergency Repair Automaton,"Ukrator	Metal Gerzinen",0,0,0,371,0
-strategic-domination-droid,megaman,strategic-domination-droid,megaman,Strategic Domination Droid,MegaMan,0,0,0,338,0
-honda-p2,self-aware-planetary-analysis-drone,honda-p2,self-aware-planetary-analysis-drone,Honda P2,Self-Aware Planetary Analysis Drone,0,0,0,335,0
-chougaodeen-robo,brainstorm,chougaodeen-robo,brainstorm,Chougaodeen Robo,Brainstorm,0,0,0,270,0
-chougaodeen-robo,hal-9000,chougaodeen-robo,hal-9000,Chougaodeen Robo,HAL 9000,0,0,0,264,0
-chougaodeen-robo,extra-terrestrial-transportation-droid,chougaodeen-robo,extra-terrestrial-transportation-droid,Chougaodeen Robo,Extra-Terrestrial Transportation Droid,0,0,0,215,0
-mechanized-caretaker-automaton,humanoid-vegetation-droid,mechanized-caretaker-automaton,humanoid-vegetation-droid,Mechanized Caretaker Automaton,Humanoid Vegetation Droid,0,0,0,196,0
-honda-p2,motorized-safety-guard-cyborg,honda-p2,motorized-safety-guard-cyborg,Honda P2,Motorized Safety Guard Cyborg,0,0,0,191,0
-computerized-data-collection-device,integrated-education-technology,computerized-data-collection-device,integrated-education-technology,Computerized Data Collection Device,Integrated Education Technology,0,0,0,189,0
-chougaodeen-robo,ememator-king,chougaodeen-robo,ememator-king,Chougaodeen Robo,Ememator King,0,0,0,172,0
-computerized-data-collection-device,artificial-sanitation-entity,computerized-data-collection-device,artificial-sanitation-entity,Computerized Data Collection Device,Artificial Sanitation Entity,0,0,0,168,0
-chougaodeen-robo,super-robot-control-entity,chougaodeen-robo,super-robot-control-entity,Chougaodeen Robo,Super Robot Control Entity,0,0,0,165,0
-honda-p2,integrated-education-technology,honda-p2,integrated-education-technology,Honda P2,Integrated Education Technology,0,0,0,158,0
-integrated-emergency-response-drone,global-operation-robot,integrated-emergency-response-drone,global-operation-robot,Integrated Emergency Response Drone,Global Operation Robot,0,0,0,60,0
-motorized-safety-guard-cyborg,asx-200-chart-maker,motorized-safety-guard-cyborg,asx-200-chart-maker,Motorized Safety Guard Cyborg,Asx 200 Chart Maker,0,0,0,58,0
-scrappie,strategic-airplane-control-golem,scrappie,strategic-airplane-control-golem,Scrappie,Strategic Airplane Control Golem,0,0,0,52,0
-reactive-guidance-juggernaut,motorized-safety-guard-cyborg,reactive-guidance-juggernaut,motorized-safety-guard-cyborg,Reactive Guidance Juggernaut,Motorized Safety Guard Cyborg,0,0,0,40,0
-"scrappy	zenwadzen-3",artificial-sanitation-entity,"scrappy	zenwadzen-3",artificial-sanitation-entity,"Scrappy	Zenwadzen 3",Artificial Sanitation Entity,0,0,0,26,0
-computerized-data-collection-device,perseverance,computerized-data-collection-device,perseverance,Computerized Data Collection Device,Perseverance,0,0,0,24,0
-computerized-data-collection-device,humanoid-vegetation-droid,computerized-data-collection-device,humanoid-vegetation-droid,Computerized Data Collection Device,Humanoid Vegetation Droid,0,0,0,23,0
-computerized-data-collection-device,general-greivous,computerized-data-collection-device,general-greivous,Computerized Data Collection Device,General Greivous,0,0,0,21,0
-computerized-data-collection-device,asx-200-chart-maker,computerized-data-collection-device,asx-200-chart-maker,Computerized Data Collection Device,Asx 200 Chart Maker,0,0,0,19,0
-strategic-domination-droid,essential-probe-cyborg,strategic-domination-droid,essential-probe-cyborg,Strategic Domination Droid,Essential Probe Cyborg,0,17,0,0,0
-prime-encoding-automaton,experimental-emergency-repair-automaton,prime-encoding-automaton,experimental-emergency-repair-automaton,Prime Encoding Automaton,Experimental Emergency Repair Automaton,0,0,0,16,0
-strategic-domination-droid,reactive-guidance-juggernaut,strategic-domination-droid,reactive-guidance-juggernaut,Strategic Domination Droid,Reactive Guidance Juggernaut,0,0,0,11,0
-strategic-domination-droid,gerty,strategic-domination-droid,gerty,Strategic Domination Droid,Gerty,0,0,0,8,0
-gerty,strategic-domination-droid,gerty,strategic-domination-droid,Gerty,Strategic Domination Droid,0,0,0,7,0
-strategic-domination-droid,dynamic-demolition-android,strategic-domination-droid,dynamic-demolition-android,Strategic Domination Droid,Dynamic Demolition Android,0,0,0,7,0
-humanoid-planet-exploration-emulator,integrated-education-technology,humanoid-planet-exploration-emulator,integrated-education-technology,Humanoid Planet Exploration Emulator,Integrated Education Technology,0,0,0,6,0
-generic-animal-handling-entity,self-aware-planetary-analysis-drone,generic-animal-handling-entity,self-aware-planetary-analysis-drone,Generic Animal Handling Entity,Self-Aware Planetary Analysis Drone,0,0,0,5,0
-spirit,reactive-guidance-juggernaut,spirit,reactive-guidance-juggernaut,Spirit,Reactive Guidance Juggernaut,0,4,0,0,0
-programmed-emergency-response-bot,primitive-base-protection-emulator,programmed-emergency-response-bot,primitive-base-protection-emulator,Programmed Emergency Response Bot,Primitive Base Protection Emulator,0,0,0,4,0
-"scrappy	zenwadzen-3",perseverance,"scrappy	zenwadzen-3",perseverance,"Scrappy	Zenwadzen 3",Perseverance,0,0,0,4,0
-"scrappy	zenwadzen-3",integrated-education-technology,"scrappy	zenwadzen-3",integrated-education-technology,"Scrappy	Zenwadzen 3",Integrated Education Technology,0,0,0,4,0
-motorized-safety-guard-cyborg,motorized-safety-guard-cyborg,motorized-safety-guard-cyborg,motorized-safety-guard-cyborg,Motorized Safety Guard Cyborg,Motorized Safety Guard Cyborg,3,0,1,13,0
-adept-usher-entity,cybernated-observer-juggernaut,adept-usher-entity,cybernated-observer-juggernaut,Adept Usher Entity,Cybernated Observer Juggernaut,0,0,0,2,0
-honda-p2,self-reliant-transportation-automaton,honda-p2,self-reliant-transportation-automaton,Honda P2,Self-Reliant Transportation Automaton,0,0,0,1,0
-asx-automated-trader,asx-short-seller,asx-automated-trader,asx-short-seller,Asx Automated Trader,Asx Short Seller,0,0,0,1,0
+source,target,client_id,resource_id,client_name,resource_name,password_flow,token_exchange_flow,code_flow,client_credentials_flow,implicit_flow,refresh_token_flow
+bionic-docking-prototype,integrated-emergency-response-drone,bionic-docking-prototype,integrated-emergency-response-drone,Bionic Docking Prototype,Integrated Emergency Response Drone,0,0,0,0,27208,0
+t-1000,humanoid-vegetation-droid,t-1000,humanoid-vegetation-droid,T-1000,Humanoid Vegetation Droid,0,0,5784,0,0,0
+c3po,humanoid-vegetation-droid,c3po,humanoid-vegetation-droid,C3PO,Humanoid Vegetation Droid,0,0,0,0,10569,0
+self-reliant-bomb-disposal-golem,experimental-emergency-repair-automaton,self-reliant-bomb-disposal-golem,experimental-emergency-repair-automaton,Self-Reliant Bomb Disposal Golem,Experimental Emergency Repair Automaton,0,0,1662,0,0,3
+sensory-flora-and-fauna-technology,strategic-airplane-control-golem,sensory-flora-and-fauna-technology,strategic-airplane-control-golem,Sensory Flora and Fauna Technology,Strategic Airplane Control Golem,0,0,0,0,229,8
+extraterrestial-servant-prototype,automatic-animal-protection-android,extraterrestial-servant-prototype,automatic-animal-protection-android,Extraterrestial Servant Prototype,Automatic Animal Protection Android,0,0,162,0,0,0
+supreme-translation-robot,conscious-piloting-juggernaut,supreme-translation-robot,conscious-piloting-juggernaut,Supreme Translation Robot,Conscious Piloting Juggernaut,0,0,0,0,470,10
+awesom-o,global-operation-robot,awesom-o,global-operation-robot,Awesom-O,Global Operation Robot,0,0,0,0,65,0
+t-1000,megaman,t-1000,megaman,T-1000,MegaMan,0,0,27,0,0,0
+generic-engineering-technology,automatic-animal-protection-android,generic-engineering-technology,automatic-animal-protection-android,Generic Engineering Technology,Automatic Animal Protection Android,0,0,22,0,0,0
+survey-drone,automatic-animal-protection-android,survey-drone,automatic-animal-protection-android,Survey Drone,Automatic Animal Protection Android,0,0,0,0,12,0
+conscious-regulation-emulator,humanoid-vegetation-droid,conscious-regulation-emulator,humanoid-vegetation-droid,Conscious Regulation Emulator,Humanoid Vegetation Droid,0,0,478764,0,0,0
+speedy,cybernated-pilot-bot,speedy,cybernated-pilot-bot,Speedy,Cybernated Pilot Bot,0,0,0,0,3,0
+speedy,"ukrator	metal-gerzinen",speedy,"ukrator	metal-gerzinen",Speedy,"Ukrator	Metal Gerzinen",0,0,0,0,4874,400
+electronic-shepherd-droid,disposal-emulator,electronic-shepherd-droid,disposal-emulator,Electronic Shepherd Droid,Disposal Emulator,0,0,0,0,786,0
+marvin-the-paranoid-android,conscious-regulation-emulator,marvin-the-paranoid-android,conscious-regulation-emulator,Marvin the Paranoid Android,Conscious Regulation Emulator,0,0,62462,0,0,0
+marvin-the-paranoid-android,responsive-education-device,marvin-the-paranoid-android,responsive-education-device,Marvin the Paranoid Android,Responsive Education Device,0,0,1,0,0,0
+conscious-termination-emulator,motorized-safety-guard-cyborg,conscious-termination-emulator,motorized-safety-guard-cyborg,Conscious Termination Emulator,Motorized Safety Guard Cyborg,0,0,1,0,0,0
+extra-terrestrial-shepherd-android,robotic-robot-control-technician,extra-terrestrial-shepherd-android,robotic-robot-control-technician,Extra-Terrestrial Shepherd Android,Robotic Robot Control Technician,0,0,0,541730,0,0
+humanoid-planet-exploration-emulator,automated-contamination-juggernaut,humanoid-planet-exploration-emulator,automated-contamination-juggernaut,Humanoid Planet Exploration Emulator,Automated Contamination Juggernaut,0,177321,0,0,0,0
+unified-harvesting-prototype,the-iron-giant,unified-harvesting-prototype,the-iron-giant,Unified Harvesting Prototype,THE IRON GIANT,0,0,0,118413,0,0
+unified-harvesting-prototype,essential-probe-golem,unified-harvesting-prototype,essential-probe-golem,Unified Harvesting Prototype,Essential Probe Golem,0,0,0,85969,0,0
+highpowered-regulation-robot,motorized-safety-guard-cyborg,highpowered-regulation-robot,motorized-safety-guard-cyborg,Highpowered Regulation Robot,Motorized Safety Guard Cyborg,0,0,0,25220,0,0
+reactive-guidance-juggernaut,self-reliant-transportation-automaton,reactive-guidance-juggernaut,self-reliant-transportation-automaton,Reactive Guidance Juggernaut,Self-Reliant Transportation Automaton,0,0,0,18459,0,0
+bishop,strategic-domination-droid,bishop,strategic-domination-droid,Bishop,Strategic Domination Droid,0,0,0,11127,0,0
+high-powered-science-android,essential-probe-golem,high-powered-science-android,essential-probe-golem,High-Powered Science Android,Essential Probe Golem,0,0,0,7848,0,0
+bishop,self-reliant-transportation-automaton,bishop,self-reliant-transportation-automaton,Bishop,Self-Reliant Transportation Automaton,0,0,0,6394,0,0
+asx-automated-trader,experimental-mining-golem,asx-automated-trader,experimental-mining-golem,Asx Automated Trader,Experimental Mining Golem,0,0,0,4095,0,0
+bishop,motorized-safety-guard-cyborg,bishop,motorized-safety-guard-cyborg,Bishop,Motorized Safety Guard Cyborg,0,0,0,3978,0,0
+generic-animal-handling-entity,leonardo,generic-animal-handling-entity,leonardo,Generic Animal Handling Entity,LEONARDO,0,0,0,3713,0,0
+humanoid-planet-exploration-emulator,extra-terrestrial-shepherd-android,humanoid-planet-exploration-emulator,extra-terrestrial-shepherd-android,Humanoid Planet Exploration Emulator,Extra-Terrestrial Shepherd Android,0,0,0,2899,0,0
+self-aware-planetary-analysis-drone,self-aware-repairation-prototype,self-aware-planetary-analysis-drone,self-aware-repairation-prototype,Self-Aware Planetary Analysis Drone,Self-Aware Repairation Prototype,0,0,0,2842,0,0
+self-aware-planetary-analysis-drone,motorized-safety-guard-cyborg,self-aware-planetary-analysis-drone,motorized-safety-guard-cyborg,Self-Aware Planetary Analysis Drone,Motorized Safety Guard Cyborg,0,0,0,2315,0,0
+generic-animal-handling-entity,motorized-safety-guard-cyborg,generic-animal-handling-entity,motorized-safety-guard-cyborg,Generic Animal Handling Entity,Motorized Safety Guard Cyborg,0,0,0,2044,0,0
+chougaodeen-robo,high-powered-science-android,chougaodeen-robo,high-powered-science-android,Chougaodeen Robo,High-Powered Science Android,0,0,0,2030,0,0
+digital-operation-juggernaut,self-aware-planetary-analysis-drone,digital-operation-juggernaut,self-aware-planetary-analysis-drone,Digital Operation Juggernaut,Self-Aware Planetary Analysis Drone,0,0,0,2015,0,0
+self-aware-planetary-analysis-drone,scrap-iron,self-aware-planetary-analysis-drone,scrap-iron,Self-Aware Planetary Analysis Drone,Scrap Iron,0,0,0,2014,0,0
+humanoid-planet-exploration-emulator,"ukrator	metal-gerzinen",humanoid-planet-exploration-emulator,"ukrator	metal-gerzinen",Humanoid Planet Exploration Emulator,"Ukrator	Metal Gerzinen",0,180664,0,1304,0,0
+self-aware-planetary-analysis-drone,digital-operation-juggernaut,self-aware-planetary-analysis-drone,digital-operation-juggernaut,Self-Aware Planetary Analysis Drone,Digital Operation Juggernaut,0,0,0,1237,0,0
+strategic-domination-droid,motorized-safety-guard-cyborg,strategic-domination-droid,motorized-safety-guard-cyborg,Strategic Domination Droid,Motorized Safety Guard Cyborg,0,4019,0,1089,0,0
+chougaodeen-robo,solar-animal-protection-cyborg,chougaodeen-robo,solar-animal-protection-cyborg,Chougaodeen Robo,Solar Animal Protection Cyborg,0,0,0,1038,0,0
+generic-animal-handling-entity,megaman,generic-animal-handling-entity,megaman,Generic Animal Handling Entity,MegaMan,0,0,0,1034,0,0
+integrated-emergency-response-drone,chougaodeen-robo,integrated-emergency-response-drone,chougaodeen-robo,Integrated Emergency Response Drone,Chougaodeen Robo,0,0,0,939,0,0
+humanoid-planet-exploration-emulator,primary-repairation-android,humanoid-planet-exploration-emulator,primary-repairation-android,Humanoid Planet Exploration Emulator,Primary Repairation Android,0,0,0,849,0,0
+experimental-emergency-repair-automaton,asx-200-chart-maker,experimental-emergency-repair-automaton,asx-200-chart-maker,Experimental Emergency Repair Automaton,Asx 200 Chart Maker,0,0,0,805,0,12
+self-aware-planetary-analysis-drone,humanoid-vegetation-droid,self-aware-planetary-analysis-drone,humanoid-vegetation-droid,Self-Aware Planetary Analysis Drone,Humanoid Vegetation Droid,0,0,0,693,0,0
+strategic-domination-droid,strategic-airplane-control-golem,strategic-domination-droid,strategic-airplane-control-golem,Strategic Domination Droid,Strategic Airplane Control Golem,0,0,0,576,0,0
+solar-animal-protection-cyborg,chougaodeen-robo,solar-animal-protection-cyborg,chougaodeen-robo,Solar Animal Protection Cyborg,Chougaodeen Robo,0,0,0,576,0,0
+solar-animal-protection-cyborg,primary-repairation-android,solar-animal-protection-cyborg,primary-repairation-android,Solar Animal Protection Cyborg,Primary Repairation Android,0,0,0,567,0,0
+strategic-domination-droid,highpowered-regulation-robot,strategic-domination-droid,highpowered-regulation-robot,Strategic Domination Droid,Highpowered Regulation Robot,0,0,0,561,0,0
+compact-personal-protection-device,strategic-airplane-control-golem,compact-personal-protection-device,strategic-airplane-control-golem,Compact Personal Protection Device,Strategic Airplane Control Golem,0,0,0,548,0,0
+strategic-domination-droid,bishop,strategic-domination-droid,bishop,Strategic Domination Droid,Bishop,0,0,0,530,0,0
+chougaodeen-robo,adept-mining-machine,chougaodeen-robo,adept-mining-machine,Chougaodeen Robo,Adept Mining Machine,0,0,0,476,0,0
+humanoid-planet-exploration-emulator,disposal-emulator,humanoid-planet-exploration-emulator,disposal-emulator,Humanoid Planet Exploration Emulator,Disposal Emulator,0,0,0,434,0,0
+strategic-domination-droid,prime-waste-collection-machine,strategic-domination-droid,prime-waste-collection-machine,Strategic Domination Droid,Prime Waste Collection Machine,0,407,0,0,0,223
+strategic-domination-droid,self-aware-planetary-analysis-drone,strategic-domination-droid,self-aware-planetary-analysis-drone,Strategic Domination Droid,Self-Aware Planetary Analysis Drone,0,0,0,393,0,0
+high-powered-science-android,the-iron-giant,high-powered-science-android,the-iron-giant,High-Powered Science Android,THE IRON GIANT,0,0,0,392,0,0
+experimental-emergency-repair-automaton,"ukrator	metal-gerzinen",experimental-emergency-repair-automaton,"ukrator	metal-gerzinen",Experimental Emergency Repair Automaton,"Ukrator	Metal Gerzinen",0,0,0,371,0,0
+strategic-domination-droid,megaman,strategic-domination-droid,megaman,Strategic Domination Droid,MegaMan,0,0,0,338,0,0
+honda-p2,self-aware-planetary-analysis-drone,honda-p2,self-aware-planetary-analysis-drone,Honda P2,Self-Aware Planetary Analysis Drone,0,0,0,335,0,0
+chougaodeen-robo,brainstorm,chougaodeen-robo,brainstorm,Chougaodeen Robo,Brainstorm,0,0,0,270,0,0
+chougaodeen-robo,hal-9000,chougaodeen-robo,hal-9000,Chougaodeen Robo,HAL 9000,0,0,0,264,0,0
+chougaodeen-robo,extra-terrestrial-transportation-droid,chougaodeen-robo,extra-terrestrial-transportation-droid,Chougaodeen Robo,Extra-Terrestrial Transportation Droid,0,0,0,215,0,0
+mechanized-caretaker-automaton,humanoid-vegetation-droid,mechanized-caretaker-automaton,humanoid-vegetation-droid,Mechanized Caretaker Automaton,Humanoid Vegetation Droid,0,0,0,196,0,0
+honda-p2,motorized-safety-guard-cyborg,honda-p2,motorized-safety-guard-cyborg,Honda P2,Motorized Safety Guard Cyborg,0,0,0,191,0,0
+computerized-data-collection-device,integrated-education-technology,computerized-data-collection-device,integrated-education-technology,Computerized Data Collection Device,Integrated Education Technology,0,0,0,189,0,0
+chougaodeen-robo,ememator-king,chougaodeen-robo,ememator-king,Chougaodeen Robo,Ememator King,0,0,0,172,0,332
+computerized-data-collection-device,artificial-sanitation-entity,computerized-data-collection-device,artificial-sanitation-entity,Computerized Data Collection Device,Artificial Sanitation Entity,0,0,0,168,0,0
+chougaodeen-robo,super-robot-control-entity,chougaodeen-robo,super-robot-control-entity,Chougaodeen Robo,Super Robot Control Entity,0,0,0,165,0,0
+honda-p2,integrated-education-technology,honda-p2,integrated-education-technology,Honda P2,Integrated Education Technology,0,0,0,158,0,0
+integrated-emergency-response-drone,global-operation-robot,integrated-emergency-response-drone,global-operation-robot,Integrated Emergency Response Drone,Global Operation Robot,0,0,0,60,0,0
+motorized-safety-guard-cyborg,asx-200-chart-maker,motorized-safety-guard-cyborg,asx-200-chart-maker,Motorized Safety Guard Cyborg,Asx 200 Chart Maker,0,0,0,58,0,0
+scrappie,strategic-airplane-control-golem,scrappie,strategic-airplane-control-golem,Scrappie,Strategic Airplane Control Golem,0,0,0,52,0,0
+reactive-guidance-juggernaut,motorized-safety-guard-cyborg,reactive-guidance-juggernaut,motorized-safety-guard-cyborg,Reactive Guidance Juggernaut,Motorized Safety Guard Cyborg,0,0,0,40,0,0
+"scrappy	zenwadzen-3",artificial-sanitation-entity,"scrappy	zenwadzen-3",artificial-sanitation-entity,"Scrappy	Zenwadzen 3",Artificial Sanitation Entity,0,0,0,26,0,0
+computerized-data-collection-device,perseverance,computerized-data-collection-device,perseverance,Computerized Data Collection Device,Perseverance,0,0,0,24,0,0
+computerized-data-collection-device,humanoid-vegetation-droid,computerized-data-collection-device,humanoid-vegetation-droid,Computerized Data Collection Device,Humanoid Vegetation Droid,0,0,0,23,0,0
+computerized-data-collection-device,general-greivous,computerized-data-collection-device,general-greivous,Computerized Data Collection Device,General Greivous,0,0,0,21,0,0
+computerized-data-collection-device,asx-200-chart-maker,computerized-data-collection-device,asx-200-chart-maker,Computerized Data Collection Device,Asx 200 Chart Maker,0,0,0,19,0,0
+strategic-domination-droid,essential-probe-cyborg,strategic-domination-droid,essential-probe-cyborg,Strategic Domination Droid,Essential Probe Cyborg,0,17,0,0,0,0
+prime-encoding-automaton,experimental-emergency-repair-automaton,prime-encoding-automaton,experimental-emergency-repair-automaton,Prime Encoding Automaton,Experimental Emergency Repair Automaton,0,0,0,16,0,0
+strategic-domination-droid,reactive-guidance-juggernaut,strategic-domination-droid,reactive-guidance-juggernaut,Strategic Domination Droid,Reactive Guidance Juggernaut,0,0,0,11,0,0
+strategic-domination-droid,gerty,strategic-domination-droid,gerty,Strategic Domination Droid,Gerty,0,0,0,8,0,0
+gerty,strategic-domination-droid,gerty,strategic-domination-droid,Gerty,Strategic Domination Droid,0,0,0,7,0,0
+strategic-domination-droid,dynamic-demolition-android,strategic-domination-droid,dynamic-demolition-android,Strategic Domination Droid,Dynamic Demolition Android,0,0,0,7,0,0
+humanoid-planet-exploration-emulator,integrated-education-technology,humanoid-planet-exploration-emulator,integrated-education-technology,Humanoid Planet Exploration Emulator,Integrated Education Technology,0,0,0,6,0,0
+generic-animal-handling-entity,self-aware-planetary-analysis-drone,generic-animal-handling-entity,self-aware-planetary-analysis-drone,Generic Animal Handling Entity,Self-Aware Planetary Analysis Drone,0,0,0,5,0,0
+spirit,reactive-guidance-juggernaut,spirit,reactive-guidance-juggernaut,Spirit,Reactive Guidance Juggernaut,0,4,0,0,0,0
+programmed-emergency-response-bot,primitive-base-protection-emulator,programmed-emergency-response-bot,primitive-base-protection-emulator,Programmed Emergency Response Bot,Primitive Base Protection Emulator,0,0,0,4,0,0
+"scrappy	zenwadzen-3",perseverance,"scrappy	zenwadzen-3",perseverance,"Scrappy	Zenwadzen 3",Perseverance,0,0,0,4,0,0
+"scrappy	zenwadzen-3",integrated-education-technology,"scrappy	zenwadzen-3",integrated-education-technology,"Scrappy	Zenwadzen 3",Integrated Education Technology,0,0,0,4,0,0
+motorized-safety-guard-cyborg,motorized-safety-guard-cyborg,motorized-safety-guard-cyborg,motorized-safety-guard-cyborg,Motorized Safety Guard Cyborg,Motorized Safety Guard Cyborg,3,0,1,13,0,0
+adept-usher-entity,cybernated-observer-juggernaut,adept-usher-entity,cybernated-observer-juggernaut,Adept Usher Entity,Cybernated Observer Juggernaut,0,0,0,2,0,0
+honda-p2,self-reliant-transportation-automaton,honda-p2,self-reliant-transportation-automaton,Honda P2,Self-Reliant Transportation Automaton,0,0,0,1,0,0
+asx-automated-trader,asx-short-seller,asx-automated-trader,asx-short-seller,Asx Automated Trader,Asx Short Seller,0,0,0,1,0,0
