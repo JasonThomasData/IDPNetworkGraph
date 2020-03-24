@@ -223,17 +223,16 @@ function appendListElement(applicationInformationElement, dataVizState, links, n
 }
 
 function collide(node) {
-    var collisionRadius = 60,
-        nx1 = node.x - collisionRadius,
-        nx2 = node.x + collisionRadius,
-        ny1 = node.y - collisionRadius,
-        ny2 = node.y + collisionRadius;
+        const nx1 = node.x - node.radius,
+            nx2 = node.x + node.radius,
+            ny1 = node.y - node.radius,
+            ny2 = node.y + node.radius;
     return function(quad, x1, y1, x2, y2) {
         if (quad.point && (quad.point !== node)) {
             var x = node.x - quad.point.x,
                 y = node.y - quad.point.y,
                 l = Math.sqrt(x * x + y * y),
-                r = collisionRadius + quad.point.radius;
+                r = node.radius + quad.point.radius;
             if (l < r) {
                 l = (l - r) / l * .5;
                 node.x -= x *= l;
@@ -296,7 +295,7 @@ d3.csv("edge-list.csv", function(links) {
 
     var links = addVisibleFieldToLinks(links);
     var nodes = getNodes(links);
-    nodes = getNodesWithRadius(nodes, 30)
+    nodes = getNodesWithRadius(nodes, 40)
     
     var width = d3.select('#content').node().getBoundingClientRect().width
     var height = d3.select('#content').node().getBoundingClientRect().height
