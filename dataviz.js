@@ -247,10 +247,8 @@ function collide(node) {
 }
 
 function tick(force, pathElements, nodeElements) {
-
-    const forceNodes = force.nodes()
-    const q = d3.geom.quadtree(forceNodes)
-    forceNodes.forEach(function(node) {
+    const q = d3.geom.quadtree(force.nodes())
+    force.nodes().forEach(function(node) {
         q.visit(collide(node))
     })
 
@@ -269,7 +267,6 @@ function tick(force, pathElements, nodeElements) {
     nodeElements
         .attr("transform", function(d) { 
         return "translate(" + d.x + "," + d.y + ")"; });
-
 }
 
 d3.csv("edge-list.csv", function(links) {
