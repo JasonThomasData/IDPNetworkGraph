@@ -62,6 +62,13 @@ function getMarkerEnd(node, link, role, ApplicationRoles) {
     return isLinkToTarget(node, link) ? 'url(#highlighted)' : 'url(#base)'
 }
 
+function isLinkAtFront(node, link, role, ApplicationRoles) {
+    if (role == ApplicationRoles.CLIENT) {
+        return isLinkFromSource(node, link) ? true : false
+    }
+    return isLinkToTarget(node, link) ? true : false
+}
+
 function getLinkVisibility(link, authFlowsIncluded) {
     return authFlowsIncluded["client_credentials_flow"] && link.client_credentials_flow > 0 ||
         authFlowsIncluded["code_flow"] && link.code_flow > 0 ||
@@ -73,6 +80,11 @@ function getLinkVisibility(link, authFlowsIncluded) {
 
 function updateHighlights(selectedNode, links, applicationRole, ApplicationRoles, nodeElements, pathElements, Colours) {
     const neighbourIds = getNeighbourIdsDependingOnRole(selectedNode, links, applicationRole, ApplicationRoles)
+
+    d3.selectAll('path.link')
+        .sort(function(a) {
+            return isLinkAtFront(selectedNode, a, applicationRole, ApplicationRoles) ? 1 : -1
+        })
 
     nodeElements.attr('fill', function (node) { return getNodeColor(node, neighbourIds, Colours) })
     pathElements.attr('stroke', function (link) { return getLinkColor(selectedNode, link, applicationRole, ApplicationRoles, Colours) })
@@ -163,6 +175,13 @@ function getNodes(links) {
     return nodes;
 }
 
+function getNodesWithRadius(nodes, radius) {
+    for (const key in nodes) {
+        nodes[key]["radius"] = radius 
+    }
+    return nodes
+}
+
 function getMostCommonClient(nodes) {
     var mostCommentClient = nodes[Object.keys(nodes)[0]];
     for (const key in nodes) {
@@ -171,15 +190,6 @@ function getMostCommonClient(nodes) {
         }
     }
     return mostCommentClient;
-}
-
-function getNodeById(nodes, id) {
-    for (const key in nodes) {
-        if (nodes[key].id == id) {
-            return nodes[key]
-        }
-    }
-    return null;
 }
 
 function appendListElement(applicationInformationElement, dataVizState, links, nodes, ApplicationRoles, nodeElements, pathElements, Colours, application) {
@@ -192,7 +202,7 @@ function appendListElement(applicationInformationElement, dataVizState, links, n
             const listElement = d3.select(this)
             listElement.style("font-weight", "bold")
             listElement.style("color", Colours.HIGHLIGHTED)
-            const tempSelectedNode = getNodeById(nodes, listElement.attr("application_id"))
+            const tempSelectedNode = nodes[listElement.attr("application_id")]
             const oppositeRole = !dataVizState.applicationRole
             updateHighlights(tempSelectedNode, links, oppositeRole, ApplicationRoles, nodeElements, pathElements, Colours)
         })
@@ -210,6 +220,52 @@ function appendListElement(applicationInformationElement, dataVizState, links, n
             })
             updateHighlights(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
         })
+}
+
+function collide(node) {
+        const nx1 = node.x - node.radius,
+            nx2 = node.x + node.radius,
+            ny1 = node.y - node.radius,
+            ny2 = node.y + node.radius;
+    return function(quad, x1, y1, x2, y2) {
+        if (quad.point && (quad.point !== node)) {
+            var x = node.x - quad.point.x,
+                y = node.y - quad.point.y,
+                l = Math.sqrt(x * x + y * y),
+                r = node.radius + quad.point.radius;
+            if (l < r) {
+                l = (l - r) / l * .5;
+                node.x -= x *= l;
+                node.y -= y *= l;
+                quad.point.x += x;
+                quad.point.y += y;
+            }
+        }
+        return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+    };
+}
+
+function tick(force, pathElements, nodeElements) {
+    const q = d3.geom.quadtree(force.nodes())
+    force.nodes().forEach(function(node) {
+        q.visit(collide(node))
+    })
+
+    pathElements.attr("d", function(d) {
+        const dx = d.target.x - d.source.x,
+            dy = d.target.y - d.source.y,
+            dr = Math.sqrt(dx * dx + dy * dy);
+        return "M" + 
+            d.source.x + "," + 
+            d.source.y + "A" + 
+            dr + "," + dr + " 0 0,1 " + 
+            d.target.x + "," + 
+            d.target.y;
+    });
+
+    nodeElements
+        .attr("transform", function(d) { 
+        return "translate(" + d.x + "," + d.y + ")"; });
 }
 
 d3.csv("edge-list.csv", function(links) {
@@ -239,17 +295,21 @@ d3.csv("edge-list.csv", function(links) {
 
     var links = addVisibleFieldToLinks(links);
     var nodes = getNodes(links);
+    nodes = getNodesWithRadius(nodes, 40)
     
     var width = d3.select('#content').node().getBoundingClientRect().width
     var height = d3.select('#content').node().getBoundingClientRect().height
 
     var force = d3.layout.force()
+        .gravity(0.03)
         .nodes(d3.values(nodes))
         .links(links)
         .size([width, height])
-        .linkDistance(15)
-        .charge(function(d, i) { return d.weight * -100 - 100; })
-        .on("tick", tick)
+        .linkDistance(2)
+        .charge(-200)
+        .on("tick", function() {
+            tick(force, pathElements, nodeElements)
+        })
         .start()
 
     var drag = d3.behavior.drag()
@@ -259,8 +319,6 @@ d3.csv("edge-list.csv", function(links) {
             this.initialY = currentTransform.translate[1]
             this.initialXDiff = +this.initialX - d3.event.sourceEvent.x
             this.initialYDiff = +this.initialY - d3.event.sourceEvent.y
-            console.log("initial", this.initialX, this.initialY)
-            console.log("initial diff", this.initialXDiff, this.initialYDiff)
         })
         .on("drag", function(){
 
@@ -379,21 +437,4 @@ d3.csv("edge-list.csv", function(links) {
     })
     updateHighlights(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
 
-    function tick() {
-        pathElements.attr("d", function(d) {
-            const dx = d.target.x - d.source.x,
-                dy = d.target.y - d.source.y,
-                dr = Math.sqrt(dx * dx + dy * dy);
-            return "M" + 
-                d.source.x + "," + 
-                d.source.y + "A" + 
-                dr + "," + dr + " 0 0,1 " + 
-                d.target.x + "," + 
-                d.target.y;
-        });
-
-        nodeElements
-            .attr("transform", function(d) { 
-            return "translate(" + d.x + "," + d.y + ")"; });
-    }
 });
