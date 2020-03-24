@@ -21,6 +21,7 @@ You may notice the data in this [example](output.csv) contains names for robots.
 - For an example about how to highlight neighbour nodes, I found [Robin Weser's article](https://medium.com/ninjaconcept/interactive-dynamic-force-directed-graphs-with-d3-da720c6d7811) to be useful
 - For more about curved lines that have arrows at the ends, [see this block](https://bl.ocks.org/d3noob/5141278)
 - Example of drag behaviour, [see this block](http://bl.ocks.org/norrs/2883411)
+- For collision detection, [see this block](https://bl.ocks.org/mbostock/3231298)
 
 # Licence
 

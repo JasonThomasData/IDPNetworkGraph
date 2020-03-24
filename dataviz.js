@@ -175,6 +175,13 @@ function getNodes(links) {
     return nodes;
 }
 
+function getNodesWithRadius(nodes, radius) {
+    for (const key in nodes) {
+        nodes[key]["radius"] = radius 
+    }
+    return nodes
+}
+
 function getMostCommonClient(nodes) {
     var mostCommentClient = nodes[Object.keys(nodes)[0]];
     for (const key in nodes) {
@@ -183,15 +190,6 @@ function getMostCommonClient(nodes) {
         }
     }
     return mostCommentClient;
-}
-
-function getNodeById(nodes, id) {
-    for (const key in nodes) {
-        if (nodes[key].id == id) {
-            return nodes[key]
-        }
-    }
-    return null;
 }
 
 function appendListElement(applicationInformationElement, dataVizState, links, nodes, ApplicationRoles, nodeElements, pathElements, Colours, application) {
@@ -204,7 +202,7 @@ function appendListElement(applicationInformationElement, dataVizState, links, n
             const listElement = d3.select(this)
             listElement.style("font-weight", "bold")
             listElement.style("color", Colours.HIGHLIGHTED)
-            const tempSelectedNode = getNodeById(nodes, listElement.attr("application_id"))
+            const tempSelectedNode = nodes[listElement.attr("application_id")]
             const oppositeRole = !dataVizState.applicationRole
             updateHighlights(tempSelectedNode, links, oppositeRole, ApplicationRoles, nodeElements, pathElements, Colours)
         })
@@ -222,6 +220,56 @@ function appendListElement(applicationInformationElement, dataVizState, links, n
             })
             updateHighlights(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
         })
+}
+
+function collide(node) {
+    var collisionRadius = 60,
+        nx1 = node.x - collisionRadius,
+        nx2 = node.x + collisionRadius,
+        ny1 = node.y - collisionRadius,
+        ny2 = node.y + collisionRadius;
+    return function(quad, x1, y1, x2, y2) {
+        if (quad.point && (quad.point !== node)) {
+            var x = node.x - quad.point.x,
+                y = node.y - quad.point.y,
+                l = Math.sqrt(x * x + y * y),
+                r = collisionRadius + quad.point.radius;
+            if (l < r) {
+                l = (l - r) / l * .5;
+                node.x -= x *= l;
+                node.y -= y *= l;
+                quad.point.x += x;
+                quad.point.y += y;
+            }
+        }
+        return x1 > nx2 || x2 < nx1 || y1 > ny2 || y2 < ny1;
+    };
+}
+
+function tick(force, pathElements, nodeElements) {
+
+    const forceNodes = force.nodes()
+    const q = d3.geom.quadtree(forceNodes)
+    forceNodes.forEach(function(node) {
+        q.visit(collide(node))
+    })
+
+    pathElements.attr("d", function(d) {
+        const dx = d.target.x - d.source.x,
+            dy = d.target.y - d.source.y,
+            dr = Math.sqrt(dx * dx + dy * dy);
+        return "M" + 
+            d.source.x + "," + 
+            d.source.y + "A" + 
+            dr + "," + dr + " 0 0,1 " + 
+            d.target.x + "," + 
+            d.target.y;
+    });
+
+    nodeElements
+        .attr("transform", function(d) { 
+        return "translate(" + d.x + "," + d.y + ")"; });
+
 }
 
 d3.csv("edge-list.csv", function(links) {
@@ -251,17 +299,21 @@ d3.csv("edge-list.csv", function(links) {
 
     var links = addVisibleFieldToLinks(links);
     var nodes = getNodes(links);
+    nodes = getNodesWithRadius(nodes, 30)
     
     var width = d3.select('#content').node().getBoundingClientRect().width
     var height = d3.select('#content').node().getBoundingClientRect().height
 
     var force = d3.layout.force()
+        .gravity(0.03)
         .nodes(d3.values(nodes))
         .links(links)
         .size([width, height])
-        .linkDistance(15)
-        .charge(function(d, i) { return d.weight * -100 - 100; })
-        .on("tick", tick)
+        .linkDistance(2)
+        .charge(-200)
+        .on("tick", function() {
+            tick(force, pathElements, nodeElements)
+        })
         .start()
 
     var drag = d3.behavior.drag()
@@ -271,8 +323,6 @@ d3.csv("edge-list.csv", function(links) {
             this.initialY = currentTransform.translate[1]
             this.initialXDiff = +this.initialX - d3.event.sourceEvent.x
             this.initialYDiff = +this.initialY - d3.event.sourceEvent.y
-            console.log("initial", this.initialX, this.initialY)
-            console.log("initial diff", this.initialXDiff, this.initialYDiff)
         })
         .on("drag", function(){
 
@@ -391,21 +441,4 @@ d3.csv("edge-list.csv", function(links) {
     })
     updateHighlights(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
 
-    function tick() {
-        pathElements.attr("d", function(d) {
-            const dx = d.target.x - d.source.x,
-                dy = d.target.y - d.source.y,
-                dr = Math.sqrt(dx * dx + dy * dy);
-            return "M" + 
-                d.source.x + "," + 
-                d.source.y + "A" + 
-                dr + "," + dr + " 0 0,1 " + 
-                d.target.x + "," + 
-                d.target.y;
-        });
-
-        nodeElements
-            .attr("transform", function(d) { 
-            return "translate(" + d.x + "," + d.y + ")"; });
-    }
 });
