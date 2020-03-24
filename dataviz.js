@@ -62,6 +62,13 @@ function getMarkerEnd(node, link, role, ApplicationRoles) {
     return isLinkToTarget(node, link) ? 'url(#highlighted)' : 'url(#base)'
 }
 
+function isLinkAtFront(node, link, role, ApplicationRoles) {
+    if (role == ApplicationRoles.CLIENT) {
+        return isLinkFromSource(node, link) ? true : false
+    }
+    return isLinkToTarget(node, link) ? true : false
+}
+
 function getLinkVisibility(link, authFlowsIncluded) {
     return authFlowsIncluded["client_credentials_flow"] && link.client_credentials_flow > 0 ||
         authFlowsIncluded["code_flow"] && link.code_flow > 0 ||
@@ -73,6 +80,11 @@ function getLinkVisibility(link, authFlowsIncluded) {
 
 function updateHighlights(selectedNode, links, applicationRole, ApplicationRoles, nodeElements, pathElements, Colours) {
     const neighbourIds = getNeighbourIdsDependingOnRole(selectedNode, links, applicationRole, ApplicationRoles)
+
+    d3.selectAll('path.link')
+        .sort(function(a) {
+            return isLinkAtFront(selectedNode, a, applicationRole, ApplicationRoles) ? 1 : -1
+        })
 
     nodeElements.attr('fill', function (node) { return getNodeColor(node, neighbourIds, Colours) })
     pathElements.attr('stroke', function (link) { return getLinkColor(selectedNode, link, applicationRole, ApplicationRoles, Colours) })
