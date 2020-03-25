@@ -268,6 +268,10 @@ function tick(force, pathElements, nodeElements) {
         return "translate(" + d.x + "," + d.y + ")"; });
 }
 
+function quadNodeCharge(node) {
+    return node.weight * node.weight + node.weight - 30
+}
+
 d3.csv("edge-list.csv", function(links) {
 
     const Colours = {
@@ -281,6 +285,7 @@ d3.csv("edge-list.csv", function(links) {
     }
 
     var dataVizState = {
+        rootNode: null,
         selectedNode: null,
         applicationRole: getApplicationRole(ApplicationRoles),
         authFlowsIncluded: {
@@ -295,22 +300,26 @@ d3.csv("edge-list.csv", function(links) {
 
     var links = addVisibleFieldToLinks(links);
     var nodes = getNodes(links);
-    nodes = getNodesWithRadius(nodes, 40)
+    nodes = getNodesWithRadius(nodes, 30)
     
     var width = d3.select('#content').node().getBoundingClientRect().width
     var height = d3.select('#content').node().getBoundingClientRect().height
 
     var force = d3.layout.force()
-        .gravity(0.03)
+        .gravity(0.01)
         .nodes(d3.values(nodes))
         .links(links)
         .size([width, height])
-        .linkDistance(2)
-        .charge(-200)
+        .charge(function(d) { return quadNodeCharge(d) })
+        //.charge(0)
         .on("tick", function() {
             tick(force, pathElements, nodeElements)
         })
         .start()
+
+    dataVizState.rootNode = getMostCommonClient(nodes)
+    console.log(dataVizState.rootNode)
+    dataVizState.rootNode.fixed = true
 
     var drag = d3.behavior.drag()
         .on("dragstart", function(){
@@ -429,7 +438,7 @@ d3.csv("edge-list.csv", function(links) {
             updateHighlights(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, nodeElements, pathElements, Colours)
         })
 
-    dataVizState.selectedNode = getMostCommonClient(nodes)
+    dataVizState.selectedNode = dataVizState.rootNode
     document.getElementById('application').value = dataVizState.selectedNode.id;
     updateLinkVisibility(dataVizState.selectedNode, links, dataVizState.authFlowsIncluded, pathElements, nodeElements)
     updateInformation(dataVizState.selectedNode, links, dataVizState.applicationRole, ApplicationRoles, applicationInformationElement, function() {
