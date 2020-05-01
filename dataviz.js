@@ -269,7 +269,25 @@ function tick(force, pathElements, nodeElements) {
 }
 
 function quadNodeCharge(node) {
-    return node.weight * node.weight + node.weight - 30
+    //y = -(n^2) - 5n - 30
+    return node.weight * node.weight * -1 - node.weight * 5 + 30
+}
+
+function getEventCoordinates(sourceEvent) {
+    if (sourceEvent.type == "mousedown") {
+        return {
+            "x": sourceEvent.clientX,
+            "y": sourceEvent.clientY
+        }
+    } else if (sourceEvent.type == "touchstart") {
+        return {
+            "x": sourceEvent.touches[0].clientX,
+            "y": sourceEvent.touches[0].clientY
+        }
+    } else {
+        console.log("No valid event found, received: " + sourceEvent)
+        return { "x": 0, "y": 0 }
+    }
 }
 
 d3.csv("edge-list.csv", function(links) {
@@ -306,12 +324,10 @@ d3.csv("edge-list.csv", function(links) {
     var height = d3.select('#content').node().getBoundingClientRect().height
 
     var force = d3.layout.force()
-        .gravity(0.01)
+        .gravity(0.02)
         .nodes(d3.values(nodes))
         .links(links)
         .size([width, height])
-        .charge(function(d) { return quadNodeCharge(d) })
-        //.charge(0)
         .on("tick", function() {
             tick(force, pathElements, nodeElements)
         })
@@ -322,15 +338,16 @@ d3.csv("edge-list.csv", function(links) {
     dataVizState.rootNode.fixed = true
 
     var drag = d3.behavior.drag()
-        .on("dragstart", function(){
+        .on("dragstart", function() {
             const currentTransform = d3.transform(d3.select("g").attr("transform"));
-            this.initialX = currentTransform.translate[0]
-            this.initialY = currentTransform.translate[1]
-            this.initialXDiff = +this.initialX - d3.event.sourceEvent.x
-            this.initialYDiff = +this.initialY - d3.event.sourceEvent.y
-        })
-        .on("drag", function(){
+            const initialX = currentTransform.translate[0]
+            const initialY = currentTransform.translate[1]
+            const startCoords = getEventCoordinates(d3.event.sourceEvent)
 
+            this.initialXDiff = +initialX - startCoords["x"]
+            this.initialYDiff = +initialY - startCoords["y"]
+        })
+        .on("drag", function() {
             const newX = d3.event.x + this.initialXDiff
             const newY = d3.event.y + this.initialYDiff
             d3.select("g").attr("transform", "translate(" + newX + "," + newY + ")");
